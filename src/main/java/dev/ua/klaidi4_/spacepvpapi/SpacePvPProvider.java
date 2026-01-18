@@ -30,4 +30,19 @@ public interface SpacePvPProvider {
      * @return 0.0 if not found.
      */
     double getKDRadio(@NotNull UUID playerUUID);
+    /**
+     * Checks if the player is currently waiting in the Default (1vs1) Queue.
+     */
+    boolean isInDefaultQueue(@NotNull UUID playerUUID);
+
+    /**
+     * Checks if the player is currently waiting in the Arena (FFA) Queue.
+     */
+    boolean isInArenaQueue(@NotNull UUID playerUUID);
+
+    /**
+     * Checks if the player is currently in ANY queue that requires Armor/Items.
+     * Returns true if the player is in Default or Arena queue with Armor mode enabled.
+     */
+    boolean isArmorMode(@NotNull UUID playerUUID);
 }
