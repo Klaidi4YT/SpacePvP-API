@@ -30,4 +30,15 @@ public interface SpacePvPAPI {
      * If the player is not found, returns 0.0.
      */
     double getKDRadio(@NotNull UUID playerUUID);
+    /**
+     * Checks if the specified player is currently in the Default Armor Queue.
+     * Returns true ONLY if the player is in the queue AND it is the default mode.
+     */
+    boolean isInDefaultArmorQueue(@NotNull UUID playerUUID);
+
+    /**
+     * Checks if the specified player is currently in the Armor Queue.
+     * Returns true ONLY if the player is in the queue AND it is the armor mode.
+     */
+    boolean isInArmorQueue(@NotNull UUID playerUUID);
 }
