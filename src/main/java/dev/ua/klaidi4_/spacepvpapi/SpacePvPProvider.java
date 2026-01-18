@@ -92,8 +92,35 @@ public interface SpacePvPProvider {
     /**
      * Gets the UUID of the opponent in an Arena Match.
      * Works during both Countdown and Active Fight.
-     * @return UUID of opponent or null if not in an arena match.
+     * UUID of opponent or null if not in an arena match.
      */
     @Nullable
     UUID getArenaOpponent(@NotNull UUID playerUUID);
+    /**
+     * Gets the name of the arena the player is currently fighting in (or counting down).
+     * Arena name or null if not in an arena match.
+     */
+    @Nullable
+    String getCurrentArenaName(@NotNull UUID playerUUID);
+    /**
+     * Checks if the player is physically inside any PvP Cabin.
+     */
+    boolean isInCabin(@NotNull UUID playerUUID);
+    /**
+     * Checks if the player is currently in an active fight inside a cabin
+     * (Status is BUSY).
+     */
+    boolean isInCabinFight(@NotNull UUID playerUUID);
+    /**
+     * Gets the name of the cabin the player is currently in.
+     * Cabin name or null if not in a cabin.
+     */
+    @Nullable
+    String getCabinName(@NotNull UUID playerUUID);
+    /**
+     * Gets the opponent of the player inside a cabin.
+     * UUID of the opponent or null.
+     */
+    @Nullable
+    UUID getCabinOpponent(@NotNull UUID playerUUID);
 }
