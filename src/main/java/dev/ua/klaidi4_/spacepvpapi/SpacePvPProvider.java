@@ -50,6 +50,12 @@ public interface SpacePvPProvider {
     /**
      * Checks if the player is currently waiting in the Default (1vs1) Queue.
      */
+    /**
+     * Removes points from a player.
+     * playerUUID The UUID of the player.
+     * amount The positive amount of points to remove.
+     */
+    void removePoints(@NotNull UUID playerUUID, int amount);
     boolean isInDefaultQueue(@NotNull UUID playerUUID);
     /**
      * Checks if the player is currently waiting in the Arena (FFA) Queue.
