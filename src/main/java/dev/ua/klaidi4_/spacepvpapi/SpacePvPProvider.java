@@ -67,7 +67,31 @@ public interface SpacePvPProvider {
      * @param amount     The new points value.
      */
     void setPoints(@NotNull UUID playerUUID, int amount);
+    /**
+     * Sets the exact amount of wins for a player.
+     * Useful for migrations or admin commands.
+     *
+     * @param playerUUID The UUID of the player.
+     * @param amount     The new wins value.
+     */
+    void setWins(@NotNull UUID playerUUID, int amount);
 
+    /**
+     * Sets the exact amount of losses for a player.
+     *
+     * @param playerUUID The UUID of the player.
+     * @param amount     The new losses value.
+     */
+    void setLosses(@NotNull UUID playerUUID, int amount);
+
+    /**
+     * Sets the current win streak for a player.
+     * Useful for restoring streaks after bugs or issues.
+     *
+     * @param playerUUID The UUID of the player.
+     * @param amount     The new streak value.
+     */
+    void setCurrentWinStreak(@NotNull UUID playerUUID, int amount);
     /**
      * Resets the player's points to the default value (usually 0).
      *
