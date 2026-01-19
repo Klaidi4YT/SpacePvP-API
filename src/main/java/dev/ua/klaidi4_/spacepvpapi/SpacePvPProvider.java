@@ -1,6 +1,7 @@
 package dev.ua.klaidi4_.spacepvpapi;
 
 import dev.ua.klaidi4_.spacepvpapi.enums.GameEndReason;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -214,15 +215,41 @@ public interface SpacePvPProvider {
     UUID getCabinOpponent(@NotNull UUID playerUUID);
 
     /**
-     * Registers a one-time callback that is executed when the specified player
-     * finishes their current or next fight.
-     * The callback is automatically removed after execution.
+     * Executes the callback when the player finishes the current
+     * or the next fight.
      *
-     * @param playerUUID The player to watch.
-     * @param callback   The action to run (provides the GameEndReason).
+     * @param playerUUID UUID of the player
+     * @param callback callback executed on fight end
      */
-    void onFightEnd(@NotNull UUID playerUUID, @NotNull Consumer<GameEndReason> callback);
+    void onFightEnd(@NotNull UUID playerUUID,
+                    @NotNull Consumer<GameEndReason> callback);
 
+    /**
+     * Executes the callback when the player starts the next fight
+     * (after the countdown).
+     * The consumer receives the arena name (String) or {@code null}.
+     *
+     * @param playerUUID UUID of the player
+     * @param callback callback executed on fight start
+     */
+    void onFightStart(@NotNull UUID playerUUID,
+                      @NotNull Consumer<String> callback);
+    /**
+     * Forcefully ends the player's current fight.
+     *
+     * @param player the player whose fight should be ended
+     * @param reason the reason why the fight was ended
+     * @return true if the fight was successfully ended, false otherwise
+     */
+    boolean endFight(@NotNull Player player, @NotNull GameEndReason reason);
+
+    /**
+     * Gets the duration of the player's current fight in seconds.
+     *
+     * @param playerUUID UUID of the player
+     * @return fight duration in seconds
+     */
+    long getFightDuration(@NotNull UUID playerUUID);
     /**
      * Get a list of all available kit names.
      *
