@@ -166,7 +166,18 @@ public interface SpacePvPProvider {
      */
     @Nullable
     String getCurrentArenaName(@NotNull UUID playerUUID);
+    /**
+     * Gets a list of all configured arena names.
+     */
+    @NotNull
+    List<String> getArenaNames();
 
+    /**
+     * Checks if a specific arena is currently READY.
+     *
+     * @param arenaName The name of the arena.
+     */
+    boolean isArenaReady(@NotNull String arenaName);
     /**
      * Checks if the player is physically inside any PvP Cabin.
      *
