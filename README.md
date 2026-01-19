@@ -2,6 +2,7 @@
 
 ![Java 17](https://img.shields.io/badge/Java-17%2B-orange?style=flat)
 [![JitPack](https://jitpack.io/v/Klaidi4YT/SpacePvP-API.svg?style=flat)](https://jitpack.io/#Klaidi4YT/SpacePvP-API)
+[![SpigotMC](https://img.shields.io/badge/SpigotMC-Resource-orange?style=flat&logo=spigotmc)](https://www.spigotmc.org/resources/spacepvp.124417/)
 
 **SpacePvP-API** is the comprehensive developer interface for the **SpacePvP** plugin.
 It allows you to deeply integrate PvP mechanics, manipulate player statistics, manage queues, control arena states, and listen to custom game events.
@@ -317,6 +318,7 @@ public void onQueueJoin(DefaultQueueJoinEvent event) {
     }
 }
 ```
+
 
 
 
