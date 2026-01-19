@@ -1,10 +1,11 @@
 package dev.ua.klaidi4_.spacepvpapi;
 
+import dev.ua.klaidi4_.spacepvpapi.enums.GameEndReason;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
-
+import java.util.function.Consumer;
 public interface SpacePvPProvider {
 
     /**
@@ -123,4 +124,14 @@ public interface SpacePvPProvider {
      */
     @Nullable
     UUID getCabinOpponent(@NotNull UUID playerUUID);
+    /**
+     * Registers a one-time callback that is executed when the specified player
+     * finishes their current or next fight.
+     *
+     * The callback is automatically removed after execution.
+     *
+     * playerUUID The player to watch.
+     * callback   The action to run (provides the GameEndReason).
+     */
+    void onFightEnd(@NotNull UUID playerUUID, @NotNull Consumer<GameEndReason> callback);
 }
