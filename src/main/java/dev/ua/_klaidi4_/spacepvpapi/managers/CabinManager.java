@@ -1,6 +1,6 @@
 package dev.ua._klaidi4_.spacepvpapi.managers;
 
-import dev.ua._klaidi4_.spacepvpapi.enums.CabinsStatus;
+import dev.ua._klaidi4_.spacepvpapi.enums.ApiCabinsStatus;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -110,7 +110,7 @@ public interface CabinManager {
      * @return The CabinsStatus or null if cabin not found.
      */
     @Nullable
-    CabinsStatus getCabinStatus(@NotNull String cabinName);
+    ApiCabinsStatus getCabinStatus(@NotNull String cabinName);
 
     /**
      * Checks if a specific cabin is currently READY.

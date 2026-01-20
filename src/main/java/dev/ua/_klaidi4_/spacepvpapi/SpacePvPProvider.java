@@ -1,6 +1,6 @@
 package dev.ua._klaidi4_.spacepvpapi;
 
-import dev.ua._klaidi4_.spacepvpapi.enums.GameEndReason;
+import dev.ua._klaidi4_.spacepvpapi.enums.ApiGameEndReason;
 import dev.ua._klaidi4_.spacepvpapi.managers.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +57,7 @@ public interface SpacePvPProvider {
      * @param callback callback executed on fight end
      */
     void onFightEnd(@NotNull UUID playerUUID,
-                    @NotNull Consumer<GameEndReason> callback);
+                    @NotNull Consumer<ApiGameEndReason> callback);
 
     /**
      * Executes the callback when the player starts the next fight
@@ -77,7 +77,7 @@ public interface SpacePvPProvider {
      * @param reason the reason why the fight was ended
      * @return true if the fight was successfully ended, false otherwise
      */
-    boolean endFight(@NotNull Player player, @NotNull GameEndReason reason);
+    boolean endFight(@NotNull Player player, @NotNull ApiGameEndReason reason);
 
     /**
      * Gets the duration of the player's current fight in seconds.

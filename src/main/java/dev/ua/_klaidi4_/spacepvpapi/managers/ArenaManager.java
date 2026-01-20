@@ -1,6 +1,6 @@
 package dev.ua._klaidi4_.spacepvpapi.managers;
 
-import dev.ua._klaidi4_.spacepvpapi.enums.ArenaStatus;
+import dev.ua._klaidi4_.spacepvpapi.enums.ApiArenaStatus;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -145,5 +145,5 @@ public interface ArenaManager {
      * @return The ArenaStatus or null if arena not found.
      */
     @Nullable
-    ArenaStatus getArenaStatus(@NotNull String arenaName);
+    ApiArenaStatus getArenaStatus(@NotNull String arenaName);
 }

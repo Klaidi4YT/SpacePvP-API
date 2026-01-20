@@ -1,7 +1,7 @@
 package dev.ua._klaidi4_.spacepvpapi.events;
 
-import dev.ua._klaidi4_.spacepvpapi.enums.GameEndReason;
-import dev.ua._klaidi4_.spacepvpapi.enums.GameType;
+import dev.ua._klaidi4_.spacepvpapi.enums.ApiGameEndReason;
+import dev.ua._klaidi4_.spacepvpapi.enums.ApiGameType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -12,11 +12,11 @@ public class PvPGameEndEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private final Player winner;
     private final Player loser;
-    private final GameType type;
-    private final GameEndReason reason;
+    private final ApiGameType type;
+    private final ApiGameEndReason reason;
     private final String arenaName;
 
-    public PvPGameEndEvent(@Nullable Player winner, @Nullable Player loser, @NotNull GameType type, @NotNull GameEndReason reason, @Nullable String arenaName) {
+    public PvPGameEndEvent(@Nullable Player winner, @Nullable Player loser, @NotNull ApiGameType type, @NotNull ApiGameEndReason reason, @Nullable String arenaName) {
         this.winner = winner;
         this.loser = loser;
         this.type = type;
@@ -26,8 +26,8 @@ public class PvPGameEndEvent extends Event {
 
     public @Nullable Player getWinner() { return winner; }
     public @Nullable Player getLoser() { return loser; }
-    public @NotNull GameType getType() { return type; }
-    public @NotNull GameEndReason getReason() { return reason; }
+    public @NotNull ApiGameType getType() { return type; }
+    public @NotNull ApiGameEndReason getReason() { return reason; }
     public @Nullable String getArenaName() { return arenaName; }
 
     @Override

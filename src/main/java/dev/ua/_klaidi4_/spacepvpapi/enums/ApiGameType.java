@@ -1,6 +1,6 @@
 package dev.ua._klaidi4_.spacepvpapi.enums;
 
-public enum GameType {
+public enum ApiGameType {
     DEFAULT,
     ARENA,
     CABIN
