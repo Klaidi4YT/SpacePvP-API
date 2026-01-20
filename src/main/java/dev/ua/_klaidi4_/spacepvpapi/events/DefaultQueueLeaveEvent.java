@@ -1,21 +1,17 @@
-package dev.ua.klaidi4_.spacepvpapi.events;
+package dev.ua._klaidi4_.spacepvpapi.events;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class ArenaQueueJoinEvent extends Event implements Cancellable {
+public class DefaultQueueLeaveEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private final Player player;
-    private final String arenaName;
     private final boolean armorQueue;
-    private boolean cancelled;
 
-    public ArenaQueueJoinEvent(Player player, String arenaName, boolean armorQueue) {
+    public DefaultQueueLeaveEvent(Player player, boolean armorQueue) {
         this.player = player;
-        this.arenaName = arenaName;
         this.armorQueue = armorQueue;
     }
 
@@ -24,23 +20,12 @@ public class ArenaQueueJoinEvent extends Event implements Cancellable {
         return player;
     }
 
-    @NotNull
-    public String getArenaName() {
-        return arenaName;
-    }
-
+    /**
+     * Returns true if the player was in the Armor Queue.
+     * Returns false if the player was in the Default Queue.
+     */
     public boolean isArmorQueue() {
         return armorQueue;
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
     }
 
     @NotNull

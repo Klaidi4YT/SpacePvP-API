@@ -1,7 +1,7 @@
-package dev.ua.klaidi4_.spacepvpapi.events;
+package dev.ua._klaidi4_.spacepvpapi.events;
 
-import dev.ua.klaidi4_.spacepvpapi.enums.GameEndReason;
-import dev.ua.klaidi4_.spacepvpapi.enums.GameType;
+import dev.ua._klaidi4_.spacepvpapi.enums.GameEndReason;
+import dev.ua._klaidi4_.spacepvpapi.enums.GameType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

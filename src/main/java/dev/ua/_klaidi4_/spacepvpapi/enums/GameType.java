@@ -1,4 +1,4 @@
-package dev.ua.klaidi4_.spacepvpapi.enums;
+package dev.ua._klaidi4_.spacepvpapi.enums;
 
 public enum GameType {
     DEFAULT,

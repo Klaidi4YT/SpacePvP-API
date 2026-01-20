@@ -1,4 +1,4 @@
-package dev.ua.klaidi4_.spacepvpapi.events;
+package dev.ua._klaidi4_.spacepvpapi.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;

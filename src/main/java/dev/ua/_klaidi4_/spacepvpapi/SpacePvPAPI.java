@@ -1,4 +1,4 @@
-package dev.ua.klaidi4_.spacepvpapi;
+package dev.ua._klaidi4_.spacepvpapi;
 
 import org.jetbrains.annotations.Nullable;
 
