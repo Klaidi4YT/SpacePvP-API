@@ -1,6 +1,6 @@
 package dev.ua._klaidi4_.spacepvpapi.managers;
 
-import dev.ua._klaidi4_.spacepvp.enums.ArenaStatus;
+import dev.ua._klaidi4_.spacepvpapi.enums.ArenaStatus;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
