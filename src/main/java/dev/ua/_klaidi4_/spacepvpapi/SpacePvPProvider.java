@@ -2,6 +2,7 @@ package dev.ua._klaidi4_.spacepvpapi;
 
 import dev.ua._klaidi4_.spacepvpapi.enums.ApiGameEndReason;
 import dev.ua._klaidi4_.spacepvpapi.managers.*;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -78,6 +79,36 @@ public interface SpacePvPProvider {
      * @return true if the fight was successfully ended, false otherwise
      */
     boolean endFight(@NotNull Player player, @NotNull ApiGameEndReason reason);
+    /**
+     * Starts a duel in Default mode (Random Location) between two players.
+     *
+     * @param player1 The first player (initiator).
+     * @param player2 The second player (target).
+     * @return true if the duel was successfully started,
+     *         false if the players are busy or no locations are available.
+     */
+    boolean startDefaultMatch(@NotNull Player player1, @NotNull Player player2);
+
+    /**
+     * Starts a duel in Arena mode on a RANDOM free arena.
+     *
+     * @param player1 The first player (initiator).
+     * @param player2 The second player (target).
+     * @return true if the duel was successfully started,
+     *         false if the players are busy or no free arenas are available.
+     */
+    boolean startArenaMatch(@NotNull Player player1, @NotNull Player player2);
+
+    /**
+     * Starts a duel in Arena mode on a SPECIFIC arena.
+     *
+     * @param player1   The first player (initiator).
+     * @param player2   The second player (target).
+     * @param arenaName The arena name (case-sensitive if configured that way).
+     * @return true if the duel was started,
+     *         false if the arena is busy, does not exist, or the players are busy.
+     */
+    boolean startArenaMatch(@NotNull Player player1, @NotNull Player player2, @NotNull String arenaName);
 
     /**
      * Gets the duration of the player's current fight in seconds.
@@ -86,4 +117,14 @@ public interface SpacePvPProvider {
      * @return fight duration in seconds
      */
     long getFightDuration(@NotNull UUID playerUUID);
+
+    /**
+     * Teleports a player to a location, bypassing internal plugin restrictions.
+     * * This method ensures the teleportation is not cancelled by SpacePvP
+     * event listeners (such as combat checks or game states).
+     *
+     * @param player   The player to teleport.
+     * @param location The target destination.
+     */
+    void forceTeleport(Player player, Location location);
 }
