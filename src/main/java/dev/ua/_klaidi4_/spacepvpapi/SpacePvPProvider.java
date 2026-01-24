@@ -2,9 +2,11 @@ package dev.ua._klaidi4_.spacepvpapi;
 
 import dev.ua._klaidi4_.spacepvpapi.enums.ApiGameEndReason;
 import dev.ua._klaidi4_.spacepvpapi.managers.*;
+import dev.ua._klaidi4_.spacepvpapi.objects.GameSettings;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -79,36 +81,74 @@ public interface SpacePvPProvider {
      * @return true if the fight was successfully ended, false otherwise
      */
     boolean endFight(@NotNull Player player, @NotNull ApiGameEndReason reason);
+
     /**
      * Starts a duel in Default mode (Random Location) between two players.
+     * Uses the default configuration settings.
      *
      * @param player1 The first player (initiator).
      * @param player2 The second player (target).
      * @return true if the duel was successfully started,
-     *         false if the players are busy or no locations are available.
+     * false if the players are busy or no locations are available.
      */
     boolean startDefaultMatch(@NotNull Player player1, @NotNull Player player2);
 
     /**
+     * Starts a duel in Default mode (Random Location) with CUSTOM settings.
+     *
+     * @param player1 The first player (initiator).
+     * @param player2 The second player (target).
+     * @param settings Custom game settings (countdown, sounds, etc).
+     * If null, default config settings are used.
+     * @return true if the duel was successfully started.
+     */
+    boolean startDefaultMatch(@NotNull Player player1, @NotNull Player player2, @Nullable GameSettings settings);
+
+    /**
      * Starts a duel in Arena mode on a RANDOM free arena.
+     * Uses the default configuration settings.
      *
      * @param player1 The first player (initiator).
      * @param player2 The second player (target).
      * @return true if the duel was successfully started,
-     *         false if the players are busy or no free arenas are available.
+     * false if the players are busy or no free arenas are available.
      */
     boolean startArenaMatch(@NotNull Player player1, @NotNull Player player2);
 
     /**
+     * Starts a duel in Arena mode on a RANDOM free arena with CUSTOM settings.
+     *
+     * @param player1 The first player (initiator).
+     * @param player2 The second player (target).
+     * @param settings Custom game settings (countdown, sounds, etc).
+     * If null, default config settings are used.
+     * @return true if the duel was successfully started.
+     */
+    boolean startArenaMatch(@NotNull Player player1, @NotNull Player player2, @Nullable GameSettings settings);
+
+    /**
      * Starts a duel in Arena mode on a SPECIFIC arena.
+     * Uses the default configuration settings.
      *
      * @param player1   The first player (initiator).
      * @param player2   The second player (target).
      * @param arenaName The arena name (case-sensitive if configured that way).
      * @return true if the duel was started,
-     *         false if the arena is busy, does not exist, or the players are busy.
+     * false if the arena is busy, does not exist, or the players are busy.
      */
     boolean startArenaMatch(@NotNull Player player1, @NotNull Player player2, @NotNull String arenaName);
+
+    /**
+     * Starts a duel in Arena mode on a SPECIFIC arena with CUSTOM settings.
+     *
+     * @param player1   The first player (initiator).
+     * @param player2   The second player (target).
+     * @param arenaName The arena name.
+     * @param settings Custom game settings (countdown, sounds, etc).
+     * If null, default config settings are used.
+     * @return true if the duel was started.
+     */
+    boolean startArenaMatch(@NotNull Player player1, @NotNull Player player2, @NotNull String arenaName, @Nullable GameSettings settings);
 
     /**
      * Gets the duration of the player's current fight in seconds.
