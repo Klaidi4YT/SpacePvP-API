@@ -29,7 +29,7 @@ public class GameSettings {
     private final boolean useVictoryMessages;
     private final boolean useKit;
     private final String kitName;
-
+    private final boolean clearInventory;
     private GameSettings(Builder builder) {
         this.countdownSeconds = builder.countdownSeconds;
         this.displayType = builder.displayType;
@@ -48,6 +48,7 @@ public class GameSettings {
         this.useVictoryMessages = builder.useVictoryMessages;
         this.useKit = builder.useKit;
         this.kitName = builder.kitName;
+        this.clearInventory = builder.clearInventory;
     }
 
     /**
@@ -179,6 +180,13 @@ public class GameSettings {
     public @Nullable String getKitName() {
         return kitName;
     }
+    /**
+     * Should the inventory be cleared after the battle?
+     * @return true/false or null (fallback to config)
+     */
+    public @Nullable Boolean getClearInventory() {
+        return clearInventory;
+    }
     public static class Builder {
         private Integer countdownSeconds;
         private String displayType;
@@ -197,6 +205,7 @@ public class GameSettings {
         private boolean useVictoryMessages = true;
         private boolean useKit = false;
         private String kitName = null;
+        private boolean clearInventory = false;
         /**
          * Sets the duration of the countdown in seconds.
          *
@@ -390,6 +399,13 @@ public class GameSettings {
             if (kitName != null && !kitName.isEmpty()) {
                 this.useKit = true;
             }
+            return this;
+        }
+        /**
+         * Sets whether the inventory should be cleared after the battle.
+         */
+        public Builder setClearInventory(boolean clear) {
+            this.clearInventory = clear;
             return this;
         }
         public GameSettings build() {
