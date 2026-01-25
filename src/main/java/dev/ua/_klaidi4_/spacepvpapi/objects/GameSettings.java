@@ -26,7 +26,8 @@ public class GameSettings {
     private final Integer titleFadeOut;
     private final boolean useConfig;
     private final boolean updateStats;
-
+    private final boolean useVictoryMessages;
+    private final boolean useKit;
     private GameSettings(Builder builder) {
         this.countdownSeconds = builder.countdownSeconds;
         this.displayType = builder.displayType;
@@ -42,6 +43,8 @@ public class GameSettings {
         this.titleFadeOut = builder.titleFadeOut;
         this.useConfig = builder.useConfig;
         this.updateStats = builder.updateStats;
+        this.useVictoryMessages = builder.useVictoryMessages;
+        this.useKit = builder.useKit;
     }
 
     /**
@@ -151,10 +154,21 @@ public class GameSettings {
     public static Builder builder() {
         return new Builder();
     }
+    /**
+     * Should victory messages be sent for this match?
+     * @return true/false if set, or null if it should fallback to config.
+     */
+    public @Nullable Boolean getUseVictoryMessages() {
+        return useVictoryMessages;
+    }
 
     /**
-     * Builder class for constructing GameSettings.
+     * Should a kit be given to players in this match?
+     * @return true/false if set, or null if it should fallback to config.
      */
+    public @Nullable Boolean getUseKit() {
+        return useKit;
+    }
     public static class Builder {
         private Integer countdownSeconds;
         private String displayType;
@@ -170,7 +184,8 @@ public class GameSettings {
         private Integer titleFadeOut;
         private boolean useConfig = true;
         private boolean updateStats = true;
-
+        private boolean useVictoryMessages = true;
+        private boolean useKit = false;
         /**
          * Sets the duration of the countdown in seconds.
          *
@@ -336,6 +351,23 @@ public class GameSettings {
          */
         public Builder setUpdateStats(boolean updateStats) {
             this.updateStats = updateStats;
+            return this;
+        }
+        /**
+         * Sets whether victory messages are enabled.
+         * @param enable true to enable, false to disable.
+         */
+        public Builder setUseVictoryMessages(boolean enable) {
+            this.useVictoryMessages = enable;
+            return this;
+        }
+
+        /**
+         * Sets whether kits should be used.
+         * @param useKit true to give kits, false to disable.
+         */
+        public Builder setUseKit(boolean useKit) {
+            this.useKit = useKit;
             return this;
         }
         public GameSettings build() {
