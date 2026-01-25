@@ -25,6 +25,7 @@ public class GameSettings {
     private final Integer titleStay;
     private final Integer titleFadeOut;
     private final boolean useConfig;
+    private final boolean updateStats;
 
     private GameSettings(Builder builder) {
         this.countdownSeconds = builder.countdownSeconds;
@@ -40,6 +41,7 @@ public class GameSettings {
         this.titleStay = builder.titleStay;
         this.titleFadeOut = builder.titleFadeOut;
         this.useConfig = builder.useConfig;
+        this.updateStats = builder.updateStats;
     }
 
     /**
@@ -128,14 +130,19 @@ public class GameSettings {
 
     /**
      * Checks if the settings should use config.yml as a fallback for missing values.
-     * <p>
+     *
      * If true, missing values will be taken from the plugin configuration.
      * If false, missing values will use hardcoded empty defaults.
      */
     public boolean shouldUseConfig() {
         return useConfig;
     }
-
+    /**
+     * Checks if player statistics (wins, losses, points) should be updated after the match.
+     */
+    public boolean shouldUpdateStats() {
+        return updateStats;
+    }
     /**
      * Creates a new Builder instance to configure GameSettings.
      *
@@ -162,6 +169,7 @@ public class GameSettings {
         private Integer titleStay;
         private Integer titleFadeOut;
         private boolean useConfig = true;
+        private boolean updateStats = true;
 
         /**
          * Sets the duration of the countdown in seconds.
@@ -307,15 +315,29 @@ public class GameSettings {
         /**
          * Sets whether to use the plugin's configuration as a fallback.
          *
-         * @param useConfig If true (default), missing settings are taken from config.yml.
+         * If true (default), missing settings are taken from config.yml.
          * If false, missing settings use hardcoded empty defaults.
+         *
+         * @param useConfig true to use config fallback, false to strictly use provided values
          * @return this builder
          */
-        public Builder useConfig(boolean useConfig) {
+        public Builder setUseConfig(boolean useConfig) {
             this.useConfig = useConfig;
             return this;
         }
-
+        /**
+         * Sets whether player statistics (wins, losses, points) should be updated after the match.
+         *
+         * If true (default), the plugin will record wins, losses, and award points.
+         * If false, the match will count as unranked (no stats or points changes).
+         *
+         * @param updateStats true to update stats, false to disable
+         * @return this builder
+         */
+        public Builder setUpdateStats(boolean updateStats) {
+            this.updateStats = updateStats;
+            return this;
+        }
         public GameSettings build() {
             return new GameSettings(this);
         }
