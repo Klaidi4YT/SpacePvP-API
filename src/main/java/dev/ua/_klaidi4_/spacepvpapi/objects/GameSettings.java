@@ -28,6 +28,8 @@ public class GameSettings {
     private final boolean updateStats;
     private final boolean useVictoryMessages;
     private final boolean useKit;
+    private final String kitName;
+
     private GameSettings(Builder builder) {
         this.countdownSeconds = builder.countdownSeconds;
         this.displayType = builder.displayType;
@@ -45,6 +47,7 @@ public class GameSettings {
         this.updateStats = builder.updateStats;
         this.useVictoryMessages = builder.useVictoryMessages;
         this.useKit = builder.useKit;
+        this.kitName = builder.kitName;
     }
 
     /**
@@ -169,6 +172,13 @@ public class GameSettings {
     public @Nullable Boolean getUseKit() {
         return useKit;
     }
+    /**
+     * Gets the specific kit name to use.
+     * @return Kit name or null (if using default/config kit).
+     */
+    public @Nullable String getKitName() {
+        return kitName;
+    }
     public static class Builder {
         private Integer countdownSeconds;
         private String displayType;
@@ -186,6 +196,7 @@ public class GameSettings {
         private boolean updateStats = true;
         private boolean useVictoryMessages = true;
         private boolean useKit = false;
+        private String kitName = null;
         /**
          * Sets the duration of the countdown in seconds.
          *
@@ -368,6 +379,17 @@ public class GameSettings {
          */
         public Builder setUseKit(boolean useKit) {
             this.useKit = useKit;
+            return this;
+        }
+        /**
+         * Sets a specific kit name to use.
+         * Automatically sets useKit to true if a name is provided.
+         */
+        public Builder setKitName(@Nullable String kitName) {
+            this.kitName = kitName;
+            if (kitName != null && !kitName.isEmpty()) {
+                this.useKit = true;
+            }
             return this;
         }
         public GameSettings build() {
