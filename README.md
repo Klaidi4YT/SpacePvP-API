@@ -157,6 +157,7 @@ Methods for Arena fights, queues, and **configuration/setup** data.
 ### Logic & State
 | Return Type | Method | Description |
 | :--- | :--- | :--- |
+| `boolean` | `hasFreeArena()` | Checks if there is at least one arena with status READY. |
 | `boolean` | `isInArenaQueue(UUID uuid)` | Checks if player is in the Arena Queue. |
 | `boolean` | `isInArenaCountdown(UUID uuid)` | Checks if the arena countdown is running. |
 | `boolean` | `isInArenaFight(UUID uuid)` | Checks if the arena fight is active. |
@@ -324,4 +325,5 @@ public void onDuelStart(PvPGameStartEvent event) {
 }
 
 ```
+
 
