@@ -24,14 +24,16 @@ public class GameSettings {
     private final Integer titleFadeIn;
     private final Integer titleStay;
     private final Integer titleFadeOut;
+    private final Integer regenDelaySeconds;
+    private final String kitName;
+    private final List<ApiEffect> effects;
     private final boolean useConfig;
     private final boolean updateStats;
     private final boolean useVictoryMessages;
     private final boolean useKit;
-    private final String kitName;
     private final boolean clearInventory;
     private final boolean useRegenerationArena;
-    private final Integer regenDelaySeconds;
+    private final boolean useEffects;
     private GameSettings(Builder builder) {
         this.countdownSeconds = builder.countdownSeconds;
         this.displayType = builder.displayType;
@@ -53,6 +55,8 @@ public class GameSettings {
         this.clearInventory = builder.clearInventory;
         this.useRegenerationArena = builder.useRegenerationArena;
         this.regenDelaySeconds = builder.regenDelaySeconds;
+        this.useEffects = builder.useEffects;
+        this.effects = builder.effects;
     }
 
     /**
@@ -206,6 +210,34 @@ public class GameSettings {
     public @Nullable Integer getRegenDelaySeconds() {
         return regenDelaySeconds;
     }
+    /**
+     * Should battle effects be applied?
+     */
+    public @Nullable boolean getUseEffects() {
+        return useEffects;
+    }
+
+    /**
+     * Returns the list of effects to apply.
+     */
+    public @Nullable List<ApiEffect> getEffects() {
+        return effects;
+    }
+    public static class ApiEffect {
+        private final String type;
+        private final int duration;
+        private final int amplifier;
+
+        public ApiEffect(@NotNull String type, int duration, int amplifier) {
+            this.type = type;
+            this.duration = duration;
+            this.amplifier = amplifier;
+        }
+
+        public String getType() { return type; }
+        public int getDuration() { return duration; }
+        public int getAmplifier() { return amplifier; }
+    }
     public static class Builder {
         private Integer countdownSeconds;
         private String displayType;
@@ -219,14 +251,16 @@ public class GameSettings {
         private Integer titleFadeIn;
         private Integer titleStay;
         private Integer titleFadeOut;
+        private Integer regenDelaySeconds = null;
+        private String kitName = null;
+        private List<ApiEffect> effects = null;
         private boolean useConfig = true;
         private boolean updateStats = true;
         private boolean useVictoryMessages = true;
         private boolean useKit = false;
-        private String kitName = null;
         private boolean clearInventory = false;
         private boolean useRegenerationArena = true;
-        private Integer regenDelaySeconds = null;
+        private boolean useEffects = false;
         /**
          * Sets the duration of the countdown in seconds.
          *
@@ -444,7 +478,36 @@ public class GameSettings {
             this.regenDelaySeconds = seconds;
             return this;
         }
+        /**
+         * Sets whether battle effects are enabled.
+         */
+        public Builder setUseEffects(boolean enable) {
+            this.useEffects = enable;
+            return this;
+        }
 
+        /**
+         * Adds a single effect to the list.
+         * Automatically sets useEffects to TRUE.
+         */
+        public Builder addEffect(String type, int duration, int amplifier) {
+            if (this.effects == null) this.effects = new ArrayList<>();
+            this.effects.add(new ApiEffect(type, duration, amplifier));
+            this.useEffects = true;
+            return this;
+        }
+
+        /**
+         * Sets the full list of effects.
+         * Automatically sets useEffects to TRUE if list is not empty.
+         */
+        public Builder setEffects(List<ApiEffect> effects) {
+            this.effects = new ArrayList<>(effects);
+            if (this.effects != null && !this.effects.isEmpty()) {
+                this.useEffects = true;
+            }
+            return this;
+        }
         public GameSettings build() {
             return new GameSettings(this);
         }
