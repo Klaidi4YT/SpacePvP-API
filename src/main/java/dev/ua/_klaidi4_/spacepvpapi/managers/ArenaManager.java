@@ -52,7 +52,11 @@ public interface ArenaManager {
      */
     @Nullable
     String getCurrentArenaName(@NotNull UUID playerUUID);
-
+    /**
+     * Checks if there is at least one arena with status READY.
+     * @return true if an arena is available, false otherwise.
+     */
+    boolean hasFreeArena();
     /**
      * Gets a list of all configured arena names.
      */
