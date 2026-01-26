@@ -243,8 +243,11 @@ General methods available directly in the provider.
 | `void` | `onFightEnd(UUID u, Consumer<ApiGameEndReason>)` | Executes code when a fight ends. |
 | `void` | `forceTeleport(Player player, Location location)` | Teleports a player while bypassing internal SpacePvP restrictions. Cannot be cancelled by events. |
 | `boolean` | `startDefaultMatch(Player player1, Player player2)` | Starts a duel in Default mode (Random Location). Returns false if players are busy or no locations available. |
+| `boolean` | `startDefaultMatch(Player player1, Player player2, GameSettings settings)` | Starts a duel in Default mode with custom GameSettings. |
 | `boolean` | `startArenaMatch(Player player1, Player player2)` | Starts a duel in Arena mode on a random free arena. Returns false if players are busy or no arenas available. |
+| `boolean` | `startArenaMatch(Player player1, Player player2, GameSettings settings)` | Starts a duel in Arena mode with custom GameSettings. |
 | `boolean` | `startArenaMatch(Player player1, Player player2, String arenaName)` | Starts a duel in Arena mode on a specific arena. Returns false if arena is busy, does not exist, or players are busy. |
+| `boolean` | `startArenaMatch(Player player1, Player player2, String arenaName, GameSettings settings)` | Starts a duel in a specific Arena with custom GameSettings. |
 
 ### Example Usage:
 ```java
@@ -274,7 +277,24 @@ if (arenaStarted) player.sendMessage("Arena duel started!");
 boolean specificArena = api.startArenaMatch(player1, player2, "SpaceStation");
 if (specificArena) player.sendMessage("Arena duel in SpaceStation started!");
 ```
+### Example Usage with GameSettings:
+```java
+GameSettings settings = GameSettings.builder()
+.setCountdown(5)
+.setUseKit(true)
+.setKitName("pvp")
+.setUpdateStats(true)
+.setClearInventory(true)
+.setUseEffects(true)
+.addEffect("SPEED", 200, 1)
+.setRegenArena(true)
+.setVictoryMessages(true)
+.build();
 
+
+boolean started = api.startDefaultMatch(player1, player2, settings);
+if (started) player1.sendMessage("Custom duel started!");
+```
 ---
 
 ## 🔔 Events
@@ -304,3 +324,4 @@ public void onDuelStart(PvPGameStartEvent event) {
 }
 
 ```
+
