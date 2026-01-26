@@ -30,6 +30,8 @@ public class GameSettings {
     private final boolean useKit;
     private final String kitName;
     private final boolean clearInventory;
+    private final boolean useRegenerationArena;
+    private final Integer regenDelaySeconds;
     private GameSettings(Builder builder) {
         this.countdownSeconds = builder.countdownSeconds;
         this.displayType = builder.displayType;
@@ -49,6 +51,8 @@ public class GameSettings {
         this.useKit = builder.useKit;
         this.kitName = builder.kitName;
         this.clearInventory = builder.clearInventory;
+        this.useRegenerationArena = builder.useRegenerationArena;
+        this.regenDelaySeconds = builder.regenDelaySeconds;
     }
 
     /**
@@ -162,7 +166,7 @@ public class GameSettings {
      * Should victory messages be sent for this match?
      * @return true/false if set, or null if it should fallback to config.
      */
-    public @Nullable Boolean getUseVictoryMessages() {
+    public @Nullable boolean getUseVictoryMessages() {
         return useVictoryMessages;
     }
 
@@ -170,7 +174,7 @@ public class GameSettings {
      * Should a kit be given to players in this match?
      * @return true/false if set, or null if it should fallback to config.
      */
-    public @Nullable Boolean getUseKit() {
+    public @Nullable boolean getUseKit() {
         return useKit;
     }
     /**
@@ -184,8 +188,23 @@ public class GameSettings {
      * Should the inventory be cleared after the battle?
      * @return true/false or null (fallback to config)
      */
-    public @Nullable Boolean getClearInventory() {
+    public @Nullable boolean getClearInventory() {
         return clearInventory;
+    }
+    /**
+     * Should the arena be regenerated after the match?
+     * @return true/false or null (fallback to config).
+     */
+    public @Nullable boolean getUseRegenerationArena() {
+        return useRegenerationArena;
+    }
+
+    /**
+     * Time in seconds to wait after the match ends before regenerating/teleporting.
+     * @return seconds or null (fallback to config).
+     */
+    public @Nullable Integer getRegenDelaySeconds() {
+        return regenDelaySeconds;
     }
     public static class Builder {
         private Integer countdownSeconds;
@@ -206,6 +225,8 @@ public class GameSettings {
         private boolean useKit = false;
         private String kitName = null;
         private boolean clearInventory = false;
+        private boolean useRegenerationArena = true;
+        private Integer regenDelaySeconds = null;
         /**
          * Sets the duration of the countdown in seconds.
          *
@@ -408,6 +429,22 @@ public class GameSettings {
             this.clearInventory = clear;
             return this;
         }
+        /**
+         * Sets whether the arena should be regenerated after the match.
+         */
+        public Builder setUseRegenerationArena(boolean enable) {
+            this.useRegenerationArena = enable;
+            return this;
+        }
+
+        /**
+         * Sets the delay in seconds before the arena regenerates/players are kicked.
+         */
+        public Builder setRegenDelaySeconds(int seconds) {
+            this.regenDelaySeconds = seconds;
+            return this;
+        }
+
         public GameSettings build() {
             return new GameSettings(this);
         }
