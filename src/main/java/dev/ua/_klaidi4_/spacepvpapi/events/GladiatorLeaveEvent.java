@@ -6,24 +6,18 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class DefaultQueueLeaveEvent extends Event implements Cancellable {
+public class GladiatorLeaveEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private final Player player;
-    private final boolean armorQueue;
     private boolean cancelled;
 
-    public DefaultQueueLeaveEvent(Player player, boolean armorQueue) {
+    public GladiatorLeaveEvent(@NotNull Player player) {
         this.player = player;
-        this.armorQueue = armorQueue;
     }
 
     @NotNull
     public Player getPlayer() {
         return player;
-    }
-
-    public boolean isArmorQueue() {
-        return armorQueue;
     }
 
     @Override

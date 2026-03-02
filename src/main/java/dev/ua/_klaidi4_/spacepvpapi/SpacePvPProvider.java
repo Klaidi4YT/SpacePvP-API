@@ -2,6 +2,7 @@ package dev.ua._klaidi4_.spacepvpapi;
 
 import dev.ua._klaidi4_.spacepvpapi.enums.ApiGameEndReason;
 import dev.ua._klaidi4_.spacepvpapi.managers.*;
+import dev.ua._klaidi4_.spacepvpapi.managers.events.GladiatorEventManager;
 import dev.ua._klaidi4_.spacepvpapi.objects.GameSettings;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -42,6 +43,11 @@ public interface SpacePvPProvider {
      */
     @NotNull
     KitManager getKitManager();
+    /**
+     * Gets the manager for Gladiator Events.
+     */
+    @NotNull
+    GladiatorEventManager getGladiatorEventManager();
 
 
     /**
